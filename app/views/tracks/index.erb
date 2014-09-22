@@ -1,0 +1,13 @@
+
+<a href="/tracks/new" class="button">Add a Track</a>
+
+<% @tracks.each do |track| %>
+  <div class="track">
+    <ul>
+      <li><%= track.title %></li>
+      <li><%= track.author %></li>
+      <li><a href="<%= track.url %>" target="_blank"><%= track.url %></a></li>
+      <li><%= track.created_at %></li>
+    </ul>
+  </div>
+<% end %>

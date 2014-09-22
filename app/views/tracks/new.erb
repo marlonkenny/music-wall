@@ -1,0 +1,27 @@
+<div class="small-6 small-centered column">
+<% if @track.errors.any? %>
+  <div>
+    <strong>Some issues with your track. Please fix them:</strong>
+    <% @track.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+    <% end %>
+  </div>
+<% end %>
+  <form method="post" action="/tracks">
+    <div>
+      <label>Title:</label>
+      <input type="text" name="title" value="<%= @track.title %>">
+    </div>
+    <div>
+      <label>Author:</label>
+      <input type="text" name="author" value="<%= @track.author %>">
+    </div>
+    <div>
+      <label>URL(optional):</label>
+      <input type="text" name="url" value="<%= @track.url %>">
+    </div>
+    <div>
+      <input type="submit" value="Submit">
+    </div>
+  </form>
+</div>
