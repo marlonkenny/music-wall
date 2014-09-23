@@ -1,0 +1,53 @@
+<div class="small-12 small-centered">
+  <div class="small-6 column">
+  <% if @login_errors %>
+    <div>
+      <p>Email or password doesn't match</p>
+    </div>
+  <% end %>
+    <form method="post" action="/user/login">
+      <h3>Login to your account:</h3>
+      <div>
+        <label>Email:</label>
+        <input type="text" name="email" value="<%= @user.email %>">
+      </div>
+      <div>
+        <label>Password:</label>
+        <input type="password" name="password" value="">
+      </div>
+      <div>
+        <input type="submit" class="button" value="Submit">
+      </div>
+    </form>
+  </div>
+  <div class="small-6 column">
+    <% if @user.errors.any? %>
+      <div>
+        <strong>Some issues with your user. Please fix them:</strong>
+        <ul>
+        <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+        <ul>
+      </div>
+    <% end %>
+    <form method="post" action="/user/create">
+    <h3>Create an account:</h3>
+      <div>
+        <label>Name:</label>
+        <input type="text" name="name" value="<%= @user.name %>">
+      </div>
+      <div>
+        <label>Email:</label>
+        <input type="text" name="email" value="<%= @user.email %>">
+      </div>
+      <div>
+        <label>Password:</label>
+        <input type="password" name="password" value="">
+      </div>
+      <div>
+        <input type="submit" class="button" value="Submit">
+      </div>
+    </form>
+  </div>
+</div>

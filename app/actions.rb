@@ -1,4 +1,17 @@
 # Homepage (Root path)
+
+helpers do
+
+def encrypt(input)
+  Digest::SHA1.hexdigest(input) unless input.blank?
+end
+
+def check_login
+  return true unless @user.password != encrypt(params[:password])
+end
+
+end
+
 get '/' do
   erb :index
 end
@@ -24,4 +37,39 @@ post '/tracks' do
   else
     erb :'tracks/new'
   end
+end
+
+get '/user' do
+  @user = User.new
+  erb :'user/index'
+end
+
+post '/user/create' do
+  @user = User.new(
+    name:     params[:name],
+    email:    params[:email],
+    password: encrypt(params[:password])
+    )
+  if @user.save
+    session[:user_id] = @user.id
+    redirect '/'
+  else
+    erb :'user/index'
+  end
+end
+
+post '/user/login' do
+  @user = User.where(email: params[:email]).first || User.new
+  if check_login
+    session[:user_id] = @user.id
+    redirect '/tracks'
+  else
+    @login_errors = true
+    erb :'user/index'
+  end
+end
+
+get '/user/logout' do
+  session[:user_id] = nil
+  redirect '/tracks'
 end

@@ -1,6 +1,15 @@
 .container {
-  padding: 20px;
+  padding: 60px 0px;
+}
+nav .right h3 {
+  color:#fff;
+}
+nav .divider {
+  padding: 0 5px;
 }
 ul {
   list-style: none;
+}
+.track ul {
+  margin-left: 0;
 }

@@ -14,12 +14,31 @@
   <link rel="stylesheet" href="/stylesheets/application.css">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/javascript/foundation.min.js"></script>
   <script src="/javascript/application.js"></script>
 
   <title>Music Wall</title>
 </head>
 <body>
-  <div class="container row">
+  <div class="contain-to-grid fixed">
+    <nav class="top-bar">
+      <ul class="title-area">
+        <h3><a href="/">Music Wall</a></h3>
+      </ul>
+      <section class="top-bar-section">
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <% if session[:user_id] %>
+          <li><h3>Hi <%= User.find(session[:user_id]).name %>!</h3></li>
+          <li class="divider"></li>
+          <li class="active"><a href="user/logout">Logout</a></li>
+        <% else %>
+          <li class="active"><a href="/user">Login</a></li>
+        <% end %>  
+      </ul>
+    </nav>
+  </div>
+  <div class="container small-8 small-centered column">
     <%= yield %>
   </div>
 </body>
