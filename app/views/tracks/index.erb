@@ -1,19 +1,25 @@
 <% if signed_in? %>
-<a href="/tracks/new" class="button">Add a Track</a>
+<a href="/tracks/new" class="button expand">Add a Track</a>
 <% else %>
-<a href="" class="button disabled">Sign into add a track</a>
+<a href="" class="button disabled expand">Sign in to add a track</a>
 <% end %>
 
 <% @tracks.each do |track| %>
   <div class="track">
-    <ul>
-      <li><%= track.title %></li>
-      <li><%= track.author %></li>
-      <li><a href="<%= track.url %>" target="_blank"><%= track.url %></a></li>
-      <% if track.user %>
-        <li>Added by <%= track.user.name %></li>
-      <% end %>
-      <li><%= track.created_at %></li>
-    </ul>
+      <ul>
+      <a href="<%= track.url %>" target="_blank">
+        <li><span class="track-title"><%= track.title %></span> <span class="smaller">by</span> <span class="track-author"><%= track.author %></span></li>
+        <span class="align-right">
+        <% if track.user %>
+          <li>Added by <%= track.user.name %> on</li>
+        <% end %>
+        <li><%= track.created_at.to_formatted_s(:long) %></li>
+        <li>Votes: <%= track.votes.count %></li>
+        <% if signed_in? %>
+        <li><button href="/tracks/upvote/?id=<%= track.id %>"class="button tiny upvote">Upvote</button></li>
+        <% end %>
+        </span>
+      </a>
+      </ul>
   </div>
 <% end %>

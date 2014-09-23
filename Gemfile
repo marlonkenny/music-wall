@@ -2,8 +2,7 @@
 source "https://rubygems.org"
 
 gem 'rake'
-gem 'activesupport' 
-gem 'bcrypt'
+gem 'activesupport'
 
 gem 'sinatra'
 gem 'sinatra-contrib'

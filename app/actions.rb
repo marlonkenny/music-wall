@@ -14,6 +14,10 @@ helpers do
     User.exists?(id: session[:user_id])
   end
 
+  def not_voted?
+    return true unless Vote.where(user_id: session[:user_id], track_id: @track.id).first
+  end
+
 end
 
 get '/' do
@@ -43,6 +47,13 @@ post '/tracks' do
   else
     erb :'tracks/new'
   end
+end
+
+get '/tracks/upvote/' do
+  @track = Track.find(params[:id])
+  redirect '/tracks' unless signed_in? && not_voted?
+  @track.votes.create(user_id: session[:user_id])
+  redirect '/tracks'
 end
 
 get '/user' do

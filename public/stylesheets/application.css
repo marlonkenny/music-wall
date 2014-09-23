@@ -10,6 +10,25 @@ nav .divider {
 ul {
   list-style: none;
 }
+.track {
+  padding: 15px;
+  border: 1px solid gray;
+  margin: 10px 0;
+  border-radius: 5px;
+}
 .track ul {
   margin-left: 0;
+  margin-bottom: 0;
+}
+.track a {
+  color:#222222;
+}
+.track a:visited {
+  color: #222222;
+}
+.track li {
+  display: inline;
+}
+.align-right {
+  float: right;
 }
