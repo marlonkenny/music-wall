@@ -1,5 +1,8 @@
-
+<% if signed_in? %>
 <a href="/tracks/new" class="button">Add a Track</a>
+<% else %>
+<a href="" class="button disabled">Sign into add a track</a>
+<% end %>
 
 <% @tracks.each do |track| %>
   <div class="track">
@@ -7,6 +10,9 @@
       <li><%= track.title %></li>
       <li><%= track.author %></li>
       <li><a href="<%= track.url %>" target="_blank"><%= track.url %></a></li>
+      <% if track.user %>
+        <li>Added by <%= track.user.name %></li>
+      <% end %>
       <li><%= track.created_at %></li>
     </ul>
   </div>

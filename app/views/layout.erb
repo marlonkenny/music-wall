@@ -31,7 +31,7 @@
         <% if session[:user_id] %>
           <li><h3>Hi <%= User.find(session[:user_id]).name %>!</h3></li>
           <li class="divider"></li>
-          <li class="active"><a href="user/logout">Logout</a></li>
+          <li class="active"><a href="/user/logout">Logout</a></li>
         <% else %>
           <li class="active"><a href="/user">Login</a></li>
         <% end %>  

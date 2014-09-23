@@ -2,13 +2,17 @@
 
 helpers do
 
-def encrypt(input)
-  Digest::SHA1.hexdigest(input) unless input.blank?
-end
+  def encrypt(input)
+    Digest::SHA1.hexdigest(input) unless input.blank?
+  end
 
-def check_login
-  return true unless @user.password != encrypt(params[:password])
-end
+  def check_login
+    return true unless @user.password != encrypt(params[:password])
+  end
+
+  def signed_in?
+    User.exists?(id: session[:user_id])
+  end
 
 end
 
@@ -22,12 +26,14 @@ get '/tracks' do
 end
 
 get '/tracks/new' do
+  return false unless signed_in?
   @track = Track.new
   erb :'tracks/new'
 end
 
 post '/tracks' do
-  @track = Track.new(
+  return false unless signed_in?
+  @track = User.find(session[:user_id]).tracks.new(
     title:  params[:title],
     author: params[:author],
     url:    params[:url]
